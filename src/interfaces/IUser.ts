@@ -1,3 +1,5 @@
+import { Request } from "express"
+
 export interface IUser{
     id?:number,
     firstname:string,
@@ -6,6 +8,10 @@ export interface IUser{
     password:string,
     createdAt?:Date,
     updatedAt?:Date
+}
+
+export interface IUserRequest extends Request {
+    userId:number
 }
 
 export interface IUserDTO extends Omit<IUser, "password">{}
