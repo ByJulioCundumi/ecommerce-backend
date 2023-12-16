@@ -11,7 +11,7 @@ export interface IUser{
 }
 
 export interface IUserRequest extends Request {
-    userId:number
+    user: {id:number}
 }
 
 export interface IUserDTO extends Omit<IUser, "password">{}

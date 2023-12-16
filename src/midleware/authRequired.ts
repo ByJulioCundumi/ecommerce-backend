@@ -7,10 +7,10 @@ export const authRequired = async (req:IUserRequest, res:Response, next:NextFunc
     const {token} = req.cookies;
     if(!token) return res.status(401).json({message: "Token inexistente, acceso denegado"})
     //
-    jwt.verify(token, SECRET_KEY, (error:jwt.JsonWebTokenError | null, decoded:any)=>{
+    jwt.verify(token, SECRET_KEY, (error:jwt.JsonWebTokenError | null, decoded: any)=>{
         if(error) return res.status(403).json({message: "Token invalido, acceso denegado"})
         //
-        req.userId = decoded.id;
+        req.user = decoded as {id:number};
     })
     next();
 }

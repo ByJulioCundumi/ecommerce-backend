@@ -63,18 +63,18 @@ export const postLogin = async (req:Request, res:Response)=>{
 }
 
 export const postLogout = (req:Request, res:Response)=>{
-    const {token} = req.cookies;
     res.cookie("token", "", {
         expires: new Date(0)
     })
-    res.status(204)
+    return res.status(204).end()
 }
 
 export const postVerify = async (req:Request, res:Response)=>{
     const {token} = req.cookies;
+    if(!token) return res.status(401).json({message:"Token inexistente"})
 
     jwt.verify(token, SECRET_KEY, async (error: jwt.JsonWebTokenError | null, decoded:any)=>{
-        if(error) return res.status(403).json({message:"Token inexistente"})
+        if(error) return res.status(403).json({message:"Token no valido"})
         //
         try {
             const result = await User.findOneBy({id: decoded.id})
