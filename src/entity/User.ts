@@ -18,6 +18,9 @@ export class User extends BaseEntity {
     @Column({nullable: false})
     password:string;
 
+    @Column({default: "user", nullable: false})
+    role: string;
+
     @CreateDateColumn()
     createdAt:Date;
 
