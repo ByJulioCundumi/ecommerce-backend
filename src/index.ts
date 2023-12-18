@@ -6,7 +6,6 @@ import bcrypt from "bcryptjs"
 
 const main = async ()=>{
     app.listen(PORT, HOST, ()=>{console.log(`Server started on http:${HOST}:${PORT}`)})
-    console.log(ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_FIRSTNAME)
     try {
         await AppDataSource.initialize();
         //

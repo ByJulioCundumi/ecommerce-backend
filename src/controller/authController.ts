@@ -17,7 +17,18 @@ export const postRegister = async (req: Request, res: Response) => {
         const result = await user.save();
         if (!result.id) return res.status(500)
         //
-        jwt.sign({ id: result.id }, SECRET_KEY, { expiresIn: "1d" }, (error, token) => {
+        const token:IUser = {
+            id: result.id,
+            firstname: result.firstname,
+            lastname: result.lastname,
+            email: result.email,
+            password: result.password,
+            role: result.role,
+            createdAt: result.createdAt,
+            updatedAt: result.updatedAt
+        }
+        //
+        jwt.sign(token, SECRET_KEY, { expiresIn: "1d" }, (error, token) => {
             if (error) return res.status(500)
             //
             res.cookie("token", token)
@@ -26,6 +37,7 @@ export const postRegister = async (req: Request, res: Response) => {
                 firstname: result.firstname,
                 lastname: result.lastname,
                 email: result.email,
+                role: result.role,
                 createdAt: result.createdAt,
                 updatedAt: result.updatedAt
             })
@@ -44,7 +56,18 @@ export const postLogin = async (req: Request, res: Response) => {
         const isMatch = await bcrypt.compare(password, result.password);
         if (!isMatch) return res.status(401).json({ message: "Contraseña incorrecta" })
         //
-        jwt.sign({ id: result.id }, SECRET_KEY, { expiresIn: "1d" }, (error, token) => {
+        const token:IUser = {
+            id: result.id,
+            firstname: result.firstname,
+            lastname: result.lastname,
+            email: result.email,
+            password: result.password,
+            role: result.role,
+            createdAt: result.createdAt,
+            updatedAt: result.updatedAt
+        }
+        //
+        jwt.sign(token, SECRET_KEY, { expiresIn: "1d" }, (error, token) => {
             if (error) return res.status(500)
             //
             res.cookie("token", token)
@@ -53,6 +76,7 @@ export const postLogin = async (req: Request, res: Response) => {
                 firstname: result.firstname,
                 lastname: result.lastname,
                 email: result.email,
+                role: result.role,
                 createdAt: result.createdAt,
                 updatedAt: result.updatedAt
             })
@@ -85,6 +109,7 @@ export const postVerify = async (req: Request, res: Response) => {
                 firstname: result.firstname,
                 lastname: result.lastname,
                 email: result.email,
+                role: result.role,
                 createdAt: result.createdAt,
                 updatedAt: result.updatedAt
             })

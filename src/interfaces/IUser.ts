@@ -6,12 +6,9 @@ export interface IUser{
     lastname:string,
     email:string,
     password:string,
+    role: string,
     createdAt?:Date,
     updatedAt?:Date
-}
-
-export interface IUserRequest extends Request {
-    user: {id:number}
 }
 
 export interface IUserDTO extends Omit<IUser, "password">{}
