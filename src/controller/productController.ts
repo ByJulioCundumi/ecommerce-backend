@@ -56,13 +56,14 @@ export const postProduct = async (req: Request, res: Response) => {
 
 export const putProduct = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id)
-    const product: IProduct = req.body
 
     try {
         const found = await Product.findOneBy({ id: id })
         if (!found?.id) return res.status(404).json({ message: "Producto no encontrado o inexistente" })
         //
         if (req.file) {
+            console.log("si hay un archivo")
+            const product: IProduct = req.body
             const img = await CloudinaryUploadImg(req.file.path)
             //
             await CloudinaryDeleteImg(found.img.public_id)
@@ -81,7 +82,22 @@ export const putProduct = async (req: Request, res: Response) => {
             //
             return res.status(200).json(result)
         }
-        return res.status(400).json({message: "Imagen requerida para actualizar el producto"})
+            if(!req.file){
+                console.log("no hay ningun archivo")
+                const product:IProduct = req.body;
+            //
+            found.name = product.name;
+            found.stars = product.stars;
+            found.prevPrice = product.prevPrice;
+            found.currentPrice = product.currentPrice;
+            found.category = product.category;
+            found.stock = product.stock;
+            //
+            const result = await found.save()
+            if (!result.id) return res.status(500).json({ message: "Ocurrio un error al actualizar el producto" })
+            //
+            return res.status(200).json(result)
+            }
     } catch (error) {
         console.log(error)
     }
