@@ -6,8 +6,12 @@ export class Product extends BaseEntity{
     @PrimaryGeneratedColumn()
     id:number;
 
-    @Column({nullable:false, unique:true})
-    img:string;
+    @Column({nullable:false, type: "simple-json"})
+    img:{
+        public_id:string,
+        url:string,
+        path:string
+    }
 
     @Column({nullable:false})
     name:string;

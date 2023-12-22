@@ -13,3 +13,6 @@ export const ADMIN_FIRSTNAME = process.env.ADMIN_FIRSTNAME as string | "ADMIN";
 export const ADMIN_LASTNAME = process.env.ADMIN_LASTNAME as string | "ADMIN";
 export const ADMIN_EMAIL = process.env.ADMIN_EMAIL as string | "ADMIN@gmail.com";
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD as string | "ADMIN.111";
+export const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME as string | "CLOUDINARY";
+export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY as string | "CLAPI_KEY";
+export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET as string | "CLAPI_SECRET";
