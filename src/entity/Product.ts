@@ -29,5 +29,5 @@ export class Product extends BaseEntity{
     category:string;
 
     @Column({nullable:false})
-    stock:boolean;
+    stock:string;
 }

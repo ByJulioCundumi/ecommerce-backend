@@ -35,8 +35,8 @@ export const postProduct = async (req: Request, res: Response) => {
             const img = await CloudinaryUploadImg(req.file.path)
             //
             const newProduct = new Product()
-            newProduct.img = { public_id: img.public_id, url: img.secure_url, path: req.file.path},
-            newProduct.name = product.name;
+            newProduct.img = { public_id: img.public_id, url: img.secure_url, path: req.file.path },
+                newProduct.name = product.name;
             newProduct.stars = product.stars;
             newProduct.prevPrice = product.prevPrice;
             newProduct.currentPrice = product.currentPrice;
@@ -48,7 +48,7 @@ export const postProduct = async (req: Request, res: Response) => {
             //
             return res.status(200).json(result)
         }
-        return res.status(400).json({message: "Imagen requerida para crear un nuevo producto"})
+        return res.status(400).json({ message: "Imagen requerida para crear un nuevo producto" })
     } catch (error) {
         console.log(error)
     }
@@ -82,9 +82,9 @@ export const putProduct = async (req: Request, res: Response) => {
             //
             return res.status(200).json(result)
         }
-            if(!req.file){
-                console.log("no hay ningun archivo")
-                const product:IProduct = req.body;
+        if (!req.file) {
+            console.log("no hay ningun archivo")
+            const product: IProduct = req.body;
             //
             found.name = product.name;
             found.stars = product.stars;
@@ -97,7 +97,7 @@ export const putProduct = async (req: Request, res: Response) => {
             if (!result.id) return res.status(500).json({ message: "Ocurrio un error al actualizar el producto" })
             //
             return res.status(200).json(result)
-            }
+        }
     } catch (error) {
         console.log(error)
     }
@@ -109,11 +109,11 @@ export const deleteOneProductById = async (req: Request, res: Response) => {
         const found = await Product.findOneBy({ id: id })
         if (!found?.id) return res.status(404).json({ message: "Producto no encontrado o inexistente" })
         //
-        const result = await Product.delete(id)
-        if (!(result.affected != 0)) return res.status(500).json({ message: "Ocurrio un error al eliminar el producto" })
-        //
         await CloudinaryDeleteImg(found.img.public_id);
         fs.unlink(found.img.path)
+        //
+        const result = await Product.delete(id)
+        if (!(result.affected != 0)) return res.status(500).json({ message: "Ocurrio un error al eliminar el producto" })
         //
         return res.status(204).end()
     } catch (error) {
