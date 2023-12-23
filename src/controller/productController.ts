@@ -66,8 +66,8 @@ export const putProduct = async (req: Request, res: Response) => {
             const product: IProduct = req.body
             const img = await CloudinaryUploadImg(req.file.path)
             //
-            await CloudinaryDeleteImg(found.img.public_id)
             fs.unlink(found.img.path)
+            await CloudinaryDeleteImg(found.img.public_id)
             //
             found.img = { public_id: img.public_id, url: img.secure_url, path: img.original_filename };
             found.name = product.name;
@@ -109,8 +109,8 @@ export const deleteOneProductById = async (req: Request, res: Response) => {
         const found = await Product.findOneBy({ id: id })
         if (!found?.id) return res.status(404).json({ message: "Producto no encontrado o inexistente" })
         //
-        await CloudinaryDeleteImg(found.img.public_id);
         fs.unlink(found.img.path)
+        await CloudinaryDeleteImg(found.img.public_id);
         //
         const result = await Product.delete(id)
         if (!(result.affected != 0)) return res.status(500).json({ message: "Ocurrio un error al eliminar el producto" })

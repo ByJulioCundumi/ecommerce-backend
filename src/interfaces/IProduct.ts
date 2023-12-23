@@ -7,6 +7,7 @@ export interface IProduct {
     },
     name: string,
     stars: number,
+    quantity:number
     prevPrice: number,
     currentPrice: number,
     category: string,

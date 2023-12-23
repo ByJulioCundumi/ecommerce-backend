@@ -19,6 +19,9 @@ export class Product extends BaseEntity{
     @Column({nullable:false})
     stars: number;
 
+    @Column({nullable:false, default:1})
+    quantity: number;
+
     @Column({nullable:false})
     prevPrice: number;
 
