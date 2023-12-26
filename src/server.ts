@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { Request, Response } from "express";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 
 //Server
 const app = express()
@@ -18,6 +19,7 @@ app.use(cookieParser())
 app.get("/api", (req:Request, res:Response)=>{res.json({message:"The server is working correctly"})})
 app.use("/api", authRoutes)
 app.use("/api", productRoutes)
+app.use("/api", paymentRoutes)
 
 //
 export default app;

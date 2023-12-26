@@ -16,3 +16,4 @@ export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD as string | "ADMIN.111"
 export const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME as string | "CLOUDINARY";
 export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY as string | "CLAPI_KEY";
 export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET as string | "CLAPI_SECRET";
+export const STRIPE_KEY = process.env.STRIPE_KEY as string | "STRIPESTRIPE_KEY_SECRET";

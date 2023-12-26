@@ -36,6 +36,8 @@
     "@types/morgan": "^1.9.9",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.10.4",
-    "morgan": "^1.10.0"
+    "@types/stripe": "^8.0.417",
+    "morgan": "^1.10.0",
+    "stripe": "^14.10.0"
   }
 }
